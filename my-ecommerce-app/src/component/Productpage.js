@@ -40,17 +40,9 @@ function Productpage() {
   // Function to handle removing items from the cart
   const handleRemoveFromCart = (productIdToRemove) => {
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === productIdToRemove);
-
-      // If the item's quantity is greater than 1, decrease it
-      if (existingItem && existingItem.quantity > 1) {
-        return prevItems.map((item) =>
-          item.id === productIdToRemove ? { ...item, quantity: item.quantity - 1 } : item
-        );
-      }
-
-      // Otherwise, remove the item from the cart
-      return prevItems.filter((item) => item.id !== productIdToRemove);
+      // Filter out the item to remove based on its ID
+      const updatedCartItems = prevItems.filter((item) => item.id !== productIdToRemove);
+      return updatedCartItems;
     });
   };
 
