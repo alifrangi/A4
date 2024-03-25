@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './component/Homepage';
-import ProductsPage from './data/products'; // Adjust the import path if necessary
+import Productpage from './component/Productpage'; // Adjust the import path if necessary
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products" element={<Productpage />} />
         </Routes>
       </div>
     </Router>
