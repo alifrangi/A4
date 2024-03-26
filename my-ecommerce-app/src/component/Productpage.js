@@ -9,13 +9,13 @@ function Productpage() {
   // Initialize the cart state with an empty array
   const [cartItems, setCartItems] = useState([]);
 
-  // Load cart items from localStorage when the component mounts
+  
   useEffect(() => {
     const savedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     setCartItems(savedCartItems);
   }, []);
 
-  // Save cart items to localStorage whenever the cartItems state changes
+
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
@@ -37,14 +37,23 @@ function Productpage() {
     });
   };
 
-  // Function to handle removing items from the cart
-  const handleRemoveFromCart = (productIdToRemove) => {
-    setCartItems((prevItems) => {
-      // Filter out the item to remove based on its ID
-      const updatedCartItems = prevItems.filter((item) => item.id !== productIdToRemove);
-      return updatedCartItems;
-    });
-  };
+  
+const handleRemoveFromCart = (productIdToRemove) => {
+  setCartItems((prevItems) => {
+    const existingItem = prevItems.find((item) => item.id === productIdToRemove);
+
+    // If the item exists and has more than 1 quantity, decrement the quantity
+    if (existingItem && existingItem.quantity > 1) {
+      return prevItems.map((item) =>
+        item.id === productIdToRemove ? { ...item, quantity: item.quantity - 1 } : item
+      );
+    } else {
+      
+      return prevItems.filter((item) => item.id !== productIdToRemove);
+    }
+  });
+};
+
 
   return (
     <div className="product-page">
